@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class AnimatedDefaultTextStyleWidget extends StatefulWidget {
@@ -11,22 +13,32 @@ class AnimatedDefaultTextStyleWidget extends StatefulWidget {
 class _AnimatedDefaultTextStyleWidgetState
     extends State<AnimatedDefaultTextStyleWidget> {
   bool _bool = true;
-  _chngTxt(){
+  Color color = Color.fromARGB(
+      255, Random().nextInt(255), Random().nextInt(255), Random().nextInt(255));
+  TextStyle style1 = TextStyle(
+      fontWeight: FontWeight.bold, color: Color.fromARGB(255, Random().nextInt(255), Random().nextInt(255),
+          Random().nextInt(255)), fontSize: 40);
+  TextStyle style2 = TextStyle(
+      fontWeight: FontWeight.bold, color: Color.fromARGB(255, Random().nextInt(255), Random().nextInt(255),
+          Random().nextInt(255)), fontSize: 40);
+
+  _chngTxt() {
     setState(() {
       _bool = !_bool;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment : MainAxisAlignment.center,
-        crossAxisAlignment : CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           AnimatedDefaultTextStyle(
             child: const Text('Flutter'),
-            style: _bool? const TextStyle(color: Colors.red, fontSize: 35): const TextStyle(color: Colors.black, fontSize: 35),
-            duration: const Duration(seconds: 1),
+            style: _bool ? style1 : style2,
+            duration: const Duration(microseconds: 8000),
             curve: Curves.decelerate,
           ),
           TextButton(
